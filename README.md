@@ -3,7 +3,7 @@
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 
 # C-List-implementation
-Implementation of dynamic lists int C
+Implementation of dynamic lists of int C
 
 # Basic Struct
 
