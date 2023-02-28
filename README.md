@@ -74,3 +74,67 @@ int* min_ref(struct s_list*);
 int max(struct s_list*);
 int min(struct s_list*);
 ```
+# Examples & usage
+```C
+#include <stdio.h>
+#include <stdlib.h>
+#include "list.h"
+
+int reduce_lambda(int a, int b) {
+	return a - b;
+}
+bool find_lambda(int a) {
+	return a == 2;
+}
+void map_lambda(int* a) {
+	*a = *a + 1;
+}
+void foreach_lambda(int a) {
+	printf("%d ", a);
+}
+
+#define SIZE 7
+
+int main(void) {
+	int array[SIZE] = {6, 5, 4, 3, 2, 1, 0};
+	List* list = to_list(array, SIZE);
+
+	list
+		->foreach(list, &foreach_lambda);
+	// OUTPUT: 6 5 4 3 2 1 0
+	printf("\n");
+	list
+		->reverse(list)
+		->foreach(list, &foreach_lambda);
+	// OUTPUT: 0 1 2 3 4 5 6
+	int* found = list
+		->find(list, &find_lambda);	
+	// find pointer to element using lambda function
+	
+	printf("\n");
+	list
+		->remove(list, found)
+		->add(list, 12)
+		->foreach(list, &foreach_lambda);	
+	// OUTPUT: 0 1 3 4 5 6 12 
+	
+	printf("\n");
+	printf("min: %d\n", list->min(list));
+	printf("max: %d\n", list->max(list));
+	//min: 0
+	//max: 12
+	
+	list
+		->map(list, &map_lambda)
+		->foreach(list, &foreach_lambda);
+	// OUTPUT: 1 2 4 5 6 7 13
+	printf("\n");
+	printf("%d", list->reduce(list, &reduce_lambda));
+	// OUTPUT: -36
+	
+	list->destroy(list);
+
+	return 0;
+}
+
+```
