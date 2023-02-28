@@ -2,6 +2,7 @@
 Implementation of dynamic lists int C
 
 # Basic Struct
+
 ```C
 typedef struct s_list {
 	int* values;
@@ -44,6 +45,7 @@ List* to_list(int*, int); // self pointer & size;
 ```
 
 ## Destruction & release of memory
+
 ```C
 void destroy(struct s_list*);
 
@@ -53,9 +55,15 @@ void destroy(struct s_list*);
 	...
 }
 ```
+Always destroy list instance in case of memory leaks;
 
 # Functions & Methods
 ## Iterators
+
+Iterators - specialized functions to iterate through array;
+Some of functions return base instance of list to create assembly of functions;
+Every function, except reverse, requires lambda function;
+
 ```C
 void foreach(struct s_list*, void (*)(int));
 int reduce(struct s_list*, int (*)(int, int));
@@ -65,6 +73,7 @@ List* reverse(struct s_list*);
 ```
 
 ## Structure functions
+Simple & base functions of primitive logic;
 ```C
 List* add(struct s_list*, int);
 List* remove(struct s_list*, int*);
@@ -74,6 +83,7 @@ int* min_ref(struct s_list*);
 int max(struct s_list*);
 int min(struct s_list*);
 ```
+
 # Examples & usage
 ```C
 #include <stdio.h>
